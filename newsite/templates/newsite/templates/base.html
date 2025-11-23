@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Останні новини України{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg border-b-4 border-blue-500">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="{{ url_for('home') }}" class="text-2xl font-bold text-blue-900 hover:text-blue-600 transition-colors">
+                        📰 Новини України
+                    </a>
+                </div>
+
+                <!-- Menu -->
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                        Головна
+                    </a>
+
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('profile') }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                            Профіль
+                        </a>
+                        <a href="{{ url_for('logout') }}" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium">
+                            Вихід
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+                            Вхід
+                        </a>
+                        <a href="{{ url_for('register') }}" class="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors font-medium">
+                            Реєстрація
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="max-w-6xl mx-auto px-4 py-6">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg shadow-md" role="alert">
+                            <p class="font-bold">Помилка</p>
+                            <p>{{ message }}</p>
+                        </div>
+                    {% elif category == 'success' %}
+                        <div class="mb-4 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg shadow-md" role="alert">
+                            <p class="font-bold">Успіх</p>
+                            <p>{{ message }}</p>
+                        </div>
+                    {% elif category == 'info' %}
+                        <div class="mb-4 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700 rounded-lg shadow-md" role="alert">
+                            <p class="font-bold">Інформація</p>
+                            <p>{{ message }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 pb-12">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-4 border-blue-500 mt-12">
+        <div class="max-w-6xl mx-auto px-4 py-8 text-center text-gray-600">
+            <p>&copy; 2025 Новини України. Всі права захищені.</p>
+        </div>
+    </footer>
+</body>
+</html>

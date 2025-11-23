@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Вхід - Новини України{% endblock %}
+
+{% block content %}
+    <div class="flex justify-center items-center min-h-[70vh]">
+        <div class="w-full max-w-md">
+            <!-- Card -->
+            <div class="bg-white rounded-xl shadow-lg border-t-4 border-blue-500 p-8">
+                <h2 class="text-3xl font-bold text-blue-900 mb-8 text-center">Вхід в акаунт</h2>
+
+                <form method="post" class="space-y-6">
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                        <input type="email" 
+                               id="email"
+                               name="email" 
+                               required
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                               placeholder="ваш@email.com">
+                    </div>
+
+                    <!-- Password Input -->
+                    <div>
+                        <label for="password" class="block text-gray-700 font-semibold mb-2">Пароль</label>
+                        <input type="password" 
+                               id="password"
+                               name="password" 
+                               required
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                               placeholder="••••••••">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                            class="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">
+                        Увійти
+                    </button>
+                </form>
+
+                <!-- Register Link -->
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">Немає акаунту? 
+                        <a href="{{ url_for('register') }}" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
+                            Зареєструйтеся
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
